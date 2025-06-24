@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+     <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      color: #00bfa6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .shortener-box {
+      background-color: #1e1e1e;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .shortener-box label {
+      color: #00bfa6;
+      font-size: 26px;
+      font-weight: 650;
+      margin-bottom: 20px;
+    }
+
+    .shortener-box input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+      border: 1px solid #333;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background-color: #2a2a2a;
+      color: #f1f1f1;
+      outline: none;
+    }
+
+    .shortener-box input::placeholder {
+      color: #aaa;
+    }
+
+    .shortener-box button {
+      background-color: #00bfa6;
+      color: #121212;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .shortener-box button:hover {
+      background-color: #00a38f;
+    }
+
+    footer {
+      background-color: #1f1f1f;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .shortener-box {
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <header>
+        <h1>URL Shortener</h1>
+    </header>
+    
+   
+    <% if (locals.id) { %>
+      <p>URL Generated : <a href="http://localhost:3000/url/<%= id %>"> http://localhost:3000/url/<%= id %></a></p>
+    <% } %>
+        <main>
+        <div class="shortener-box">
+                <form method="POST" action="/url">
+                    <label for="" >Enter Your Long URL here</label>
+                    <input type="text" name="url" placeholder="https://example.com">
+                    <button type="submit">Shorten URL</button>
+                    
+                </form> 
+        </div>
+    </main>
+
+    <footer>
+        © 2025 MyURLShortener — Made with ❤️
+    </footer>
+
+</body>
+</html>
