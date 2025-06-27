@@ -2,7 +2,7 @@ const express = require('express');
 const app   = express();
 const {handleGeneratenewShortURL}= require('./controllers/url');
 const urlRoute = require('./routers/url');
-const PORT = 3000;
+
 const connectToDatabase = require('./connect');
 const URL = require('./models/url');
 const path = require('path');
@@ -11,6 +11,7 @@ const { config } = require('dotenv');
 const cookieParser = require('cookie-parser')
 const staticRoute = require('./routers/staticRouter')
 const userRoute = require('./routers/user');
+const PORT = process.env.PORT || 3000;
 
 config();
 app.use(express.json());
