@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
-     <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -20,33 +21,78 @@
       flex-direction: column;
     }
 
-    header {
-      background-color: #1f1f1f;
-      padding: 20px;
-      text-align: center;
-      color: #00bfa6;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    }
+header {
+  background-color: #1f1f1f;
+  padding: 20px;
+  color: #00bfa6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
 
-    header h1 {
-      font-size: 2rem;
-    }
-
+header h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0;
+}
+.logout-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00bfa6;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border: 1px solid #00bfa6;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+.logout-btn:hover {
+  background-color: #00bfa6;
+  color: #121212;
+}
     main {
       flex: 1;
       display: flex;
-      align-items: center;
       justify-content: center;
       padding: 40px 20px;
     }
 
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    /* Success URL */
+    .success-link {
+      color: #00bfa6;
+      font-size: 1rem;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    .success-link a {
+      color: #00ffd5;
+      text-decoration: none;
+    }
+
+    .success-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Shortener Box */
     .shortener-box {
       background-color: #1e1e1e;
       padding: 40px;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
       width: 100%;
-      max-width: 500px;
       text-align: center;
     }
 
@@ -54,6 +100,7 @@
       color: #00bfa6;
       font-size: 26px;
       font-weight: 650;
+      display: block;
       margin-bottom: 20px;
     }
 
@@ -88,6 +135,69 @@
       background-color: #00a38f;
     }
 
+    /* Table Styling */
+    .table-container {
+      overflow-x: auto;
+
+      width: 100%;
+    }
+
+    .table-container h2 {
+      text-align: center;
+      color: #00bfa6;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    th,
+    td {
+      padding: 16px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    thead {
+      background-color: #00bfa6;
+      color: #121212;
+    }
+
+    thead th {
+      text-align: center;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #333;
+    }
+
+    tbody tr:hover {
+      background-color: #2a2a2a;
+    }
+
+    table a {
+      color: #00bfa6;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    table a:hover {
+      text-decoration: underline;
+    }
+
+    .no-urls {
+      text-align: center;
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    /* Footer */
     footer {
       background-color: #1f1f1f;
       padding: 10px;
@@ -96,7 +206,8 @@
       color: #aaa;
     }
 
-    @media (max-width: 600px) {
+    /* Responsive */
+    @media (max-width: 768px) {
       .shortener-box {
         padding: 20px;
       }
@@ -104,33 +215,92 @@
       header h1 {
         font-size: 1.5rem;
       }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th,
+      td {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 0 10px;
+      }
+
+      .shortener-box label {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>URL Shortener</h1>
-    </header>
-    
-   
-    <% if (locals.id) { %>
-      <p>URL Generated : <a href="http://localhost:3000/url/<%= id %>"> http://localhost:3000/url/<%= id %></a></p>
-    <% } %>
-        <main>
-        <div class="shortener-box">
-                <form method="POST" action="/url">
-                    <label for="" >Enter Your Long URL here</label>
-                    <input type="text" name="url" placeholder="https://example.com">
-                    <button type="submit">Shorten URL</button>
-                    
-                </form> 
-        </div>
-    </main>
+  <header>
+    <h1>URL Shortener</h1>
+     <a href="/user/logout" class="logout-btn">Logout</a>
+  </header>
 
-    <footer>
-        © 2025 MyURLShortener — Made with ❤️
-    </footer>
+  <main>
+    <div class="container">
+
+      <% if (locals.id) { %>
+        <p class="success-link">
+          URL Generated:
+          <a href="<%= baseUrl %>/url/<%= id %>" target="_blank">
+            <%= baseUrl %>/url/<%= id %>
+          </a>
+        </p>
+        <% } %>
+
+          <!-- Form -->
+          <div class="shortener-box">
+            <form method="POST" action="/url">
+              <label>Enter Your Long URL here</label>
+              <input type="text" name="url" placeholder="https://example.com">
+              <button type="submit">Shorten URL</button>
+            </form>
+          </div>
+
+          <!-- Table -->
+          <% if (locals.urls && urls.length> 0) { %>
+            <div class="table-container">
+              <h2>Your Shortened URLs</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 25%;">Short ID</th>
+                    <th style="width: 70%;">Original URL</th>
+                    <th style="width: 5%; text-align:center;">Clicks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% urls.forEach(url=> { %>
+                    <tr>
+                      <td><a href="<%= baseUrl %>/url/<%= url.shortId %>" target="_blank">
+                          <%= baseUrl %>/url/<%= url.shortId %>
+                        </a></td>
+                      <td>
+                        <%= url.redirectUrl %>
+                      </td>
+                      <td>
+                        <%= url.visitHistory.length %>
+                      </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+            <% } else { %>
+              <p class="no-urls">No URLs found yet.</p>
+              <% } %>
+
+    </div>
+  </main>
+
 
 </body>
+
 </html>

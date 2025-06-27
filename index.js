@@ -6,16 +6,20 @@ const PORT = 3000;
 const connectToDatabase = require('./connect');
 const URL = require('./models/url');
 const path = require('path');
+const {restrictToLoggedinUserOnly,checkAuth} = require('./middlewares/auth')
+const { config } = require('dotenv');
+const cookieParser = require('cookie-parser')
 const staticRoute = require('./routers/staticRouter')
+const userRoute = require('./routers/user');
 
-
-
+config();
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
+app.use(cookieParser());
 
-connectToDatabase('mongodb+srv://sharmapriyanshu91:4fJlemLS8ZZayBkd@cluster0.tgjfxm1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(()=>{
-    console.log('Mongodb connected')
-})
+connectToDatabase(process.env.MONGO_URL).then(() => {
+  console.log('MongoDB connected');
+});
 
 
 app.set('view engine','ejs');
@@ -23,8 +27,10 @@ app.set('views',path.resolve("./views"));
 
 
 
-app.use('/url',urlRoute);
-app.use('/',staticRoute);
+
+app.use('/url',restrictToLoggedinUserOnly,urlRoute);
+app.use('/',checkAuth,staticRoute);
+app.use('/user',userRoute);
 
 
 

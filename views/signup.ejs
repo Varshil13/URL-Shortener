@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | URL Shortener</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      color: #00bfa6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .form-box {
+      background-color: #1e1e1e;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-box h2 {
+      color: #00bfa6;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background-color: #2a2a2a;
+      color: #f1f1f1;
+      font-size: 1rem;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00bfa6;
+      border: none;
+      border-radius: 8px;
+      color: #121212;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-box button:hover {
+      background-color: #00a38f;
+    }
+
+    footer {
+      background-color: #1f1f1f;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Create Your Account</h1>
+  </header>
+
+  <main>
+    <div class="form-box">
+      <h2>Sign Up</h2>
+      <form method="POST" action="/user">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
+        <p style="margin-top: 20px; text-align: center; font-size: 0.95rem; color: #ccc;">
+          Already a user?
+          <a href="/login" style="color: #00bfa6; text-decoration: none;">Login</a>
+        </p>
+      </form>
+    </div>
+  </main>
+
+</body>
+
+</html>
