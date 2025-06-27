@@ -11,9 +11,9 @@ const { config } = require('dotenv');
 const cookieParser = require('cookie-parser')
 const staticRoute = require('./routers/staticRouter')
 const userRoute = require('./routers/user');
-const PORT = process.env.PORT || 3000;
-
 config();
+
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser());
